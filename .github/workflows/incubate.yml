@@ -1,0 +1,59 @@
+name: Incubation Fallback
+# 墨茧的兜底执行器：Cron 触发失败时 18:00 重跑孵化
+
+on:
+  schedule:
+    # UTC 10:00 = 北京时间 18:00
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: '强制孵化（忽略同日已有文章）'
+        required: false
+        default: 'false'
+
+jobs:
+  incubate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 检查今天是否已有孵化
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TODAY=$(TZ=Asia/Shanghai date +%F)
+          # 查今天的快照档案是否已存在（存在则说明 Cron 已成功）
+          if git ls-tree -r HEAD --name-only | grep -q "archive/${TODAY//-/}"; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "今天（$TODAY）的茧已孵化，跳过兜底"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "今天（$TODAY）还没有孵化记录，触发兜底"
+          fi
+
+      - name: 调用 Worker 兜底孵化
+        if: steps.check.outputs.exists == 'false'
+        env:
+          WORKER_URL: ${{ secrets.INKCOCOON_WORKER_URL }}
+          ADMIN_TOKEN: ${{ secrets.INKCOCOON_ADMIN_TOKEN }}
+        run: |
+          FORCE="${{ github.event.inputs.force || 'false' }}"
+          BODY=$(cat <<EOF
+          {"force": $FORCE}
+          EOF
+          )
+          HTTP_CODE=$(curl -s -o /tmp/resp.json -w "%{http_code}" -X POST \
+            "$WORKER_URL/api/admin/incubate" \
+            -H "Authorization: Bearer $ADMIN_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$BODY")
+          echo "HTTP $HTTP_CODE"
+          cat resp.json
+          # 200/500 都算尝试过（500 = 死卵已记录，等明天）
+          test "$HTTP_CODE" = "200" || test "$HTTP_CODE" = "500"
+
+      - name: 失败告警（可选）
+        if: failure()
+        run: echo "⚠️ 兜底孵化失败，请检查 Worker 日志（npx wrangler tail）"

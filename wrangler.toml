@@ -1,0 +1,61 @@
+# ============================================================
+# 墨茧 InkCocoon · Cloudflare Worker 配置
+# 进化引擎 + 展厅 API，一个 Worker 全包
+# ============================================================
+name = "ink-cocoon"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# ---------- 每日进化心跳（Cron） ----------
+# UTC 20:00 = 北京时间 04:00（凌晨孵化）
+[triggers]
+crons = ["0 20 * * *"]
+
+# ---------- 资源绑定 ----------
+[[d1_databases]]
+binding = "DB"
+database_name = "ink-cocoon-db"
+database_id = "d3bb1b9f-bfad-4ad5-b8a2-5a00f2f702af"
+
+[[r2_buckets]]
+binding = "ARCHIVE"
+bucket_name = "ink-cocoon-archive"
+# 部署前执行: npx wrangler r2 bucket create ink-cocoon-archive
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "50f2a57e61f94b409c9cd26e3548699d"
+
+[[kv_namespaces]]
+binding = "LOCK"
+id = "2a2e813bfcd8416790d4aea113f3a347"
+
+# 静态展厅（/public 目录直接由 Worker 托管，无需单独 Pages）
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# ---------- 环境变量（非敏感） ----------
+[vars]
+ENV = "production"
+TIMEZONE = "Asia/Shanghai"
+SITE_NAME = "墨茧 InkCocoon"
+# LLM 配置：base_url / model 写在这里，key 走 secret，不要写在这里
+LLM_BASE_URL = "http://api.feedmob.it.com/v1"
+LLM_MODEL = "minimax-m3"
+LLM_THINKING = "disabled"
+# 兜底/调试开关：true 时用模板模拟 LLM（不花钱先跑通全流程）
+MOCK_LLM = "false"
+# GitHub 快照目标仓库（每日快照 commit 的去处）
+GITHUB_REPO = "Harukaon/ink-cocoon"
+GITHUB_BRANCH = "main"
+
+# ---------- 密钥（wrangler secret put 逐个设置，不写在文件里） ----------
+# npx wrangler secret put LLM_API_KEY      # LLM API Key
+# npx wrangler secret put GITHUB_TOKEN     # GitHub PAT（repo 权限，用于每日快照 commit）
+# npx wrangler secret put ADMIN_TOKEN      # 管理接口鉴权 token
+# 可选：
+# npx wrangler secret put ALERT_WEBHOOK    # 告警 webhook（飞书/Slack），不设则跳过告警
+
+[observability]
+enabled = true
