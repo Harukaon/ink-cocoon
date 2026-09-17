@@ -385,6 +385,7 @@ export async function runEvolution(env, { force = false } = {}) {
 
     const snap = await stageTranscribe(env, ctx);
     await db.logStage(env, ctx.targetGen, 'transcribe', snap.skipped ? 0 : 1, JSON.stringify(snap).slice(0, 500));
+    await refreshHomeCache(env).catch((error) => console.error('[墨茧] 刻录后刷新首页失败', error.message));
 
     return { ok: true, gen: ctx.targetGen, title: ctx.article.title, genome: ctx.newGenomeId, mutations: ctx.appliedMutations.length };
   } catch (e) {

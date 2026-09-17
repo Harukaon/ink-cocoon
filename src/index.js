@@ -226,6 +226,13 @@ export default {
       return json({ today: beijingToday(), counts, recent_gens: last, engine_logs: logs, current_genome: currentGenome });
     }
 
+    // 强制刷新首页缓存（部署/修复后用于把历史实时日志重新汇总到首页）
+    if (path === '/api/admin/refresh' && req.method === 'POST') {
+      if (!isAdmin(req, env)) return json({ error: 'unauthorized' }, 401);
+      await refreshHomeCache(env);
+      return json({ ok: true, refreshed_at: new Date().toISOString() });
+    }
+
     // 手动孵化（补跑 / 测试）
     if (path === '/api/admin/incubate' && req.method === 'POST') {
       if (!isAdmin(req, env)) return json({ error: 'unauthorized' }, 401);
