@@ -1,12 +1,12 @@
 {
-  "genome_id": "GEN-0007",
-  "updated": "2026-09-17",
+  "genome_id": "GEN-0008",
+  "updated": "2026-09-18",
   "genes": [
     {
       "id": "voice.tone",
       "name": "语调基因",
       "allele": "冷峻克制，多用短句，不解释，不抒情，重要的话只说一遍——但在关键处允许出现一句可被复述的金句作为例外",
-      "weight": 0.9,
+      "weight": 0.7,
       "born": "GEN-0001",
       "status": "active"
     },
@@ -22,7 +22,7 @@
       "id": "structure.hook",
       "name": "结构基因",
       "allele": "以一个未回答的问题开头，让读者自己找答案",
-      "weight": 0.7,
+      "weight": 0.85,
       "born": "GEN-0001",
       "status": "active"
     },
@@ -46,7 +46,7 @@
       "id": "memory.lineage",
       "name": "血缘基因",
       "allele": "第一段必须回应父代文章的最后一句话，像回声，不重复原文",
-      "weight": 0.3,
+      "weight": 0.5,
       "born": "GEN-0001",
       "status": "active"
     },
