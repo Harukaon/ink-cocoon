@@ -1,6 +1,6 @@
 {
-  "genome_id": "GEN-0008",
-  "updated": "2026-09-18",
+  "genome_id": "GEN-0009",
+  "updated": "2026-09-19",
   "genes": [
     {
       "id": "voice.tone",
@@ -14,7 +14,7 @@
       "id": "imagery.ink",
       "name": "意象基因",
       "allele": "创世首篇只释一枚墨喻，须选一种从未被诗化的物质状态——墨在真空里的形状、墨在零重力中的悬浮；其余九枚封存待后代启用；墨可以是干的、轻的、甚至透明的；每代至多一次墨喻出场",
-      "weight": 0.6,
+      "weight": 0.25,
       "born": "GEN-0001",
       "status": "dormant"
     },
@@ -45,10 +45,10 @@
     {
       "id": "memory.lineage",
       "name": "血缘基因",
-      "allele": "第一段必须回应父代文章的最后一句话，像回声，不重复原文",
+      "allele": "第一段与前代共享一个词而非一句话，像两块石头隔着河床只露出同一道棱角",
       "weight": 0.5,
       "born": "GEN-0001",
-      "status": "active"
+      "status": "dormant"
     },
     {
       "id": "humor.dry",
