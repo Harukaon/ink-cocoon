@@ -1,12 +1,12 @@
 {
-  "genome_id": "GEN-0009",
-  "updated": "2026-09-19",
+  "genome_id": "GEN-0012",
+  "updated": "2026-09-22",
   "genes": [
     {
       "id": "voice.tone",
       "name": "语调基因",
       "allele": "冷峻克制，多用短句，不解释，不抒情，重要的话只说一遍——但在关键处允许出现一句可被复述的金句作为例外",
-      "weight": 0.7,
+      "weight": 0.68,
       "born": "GEN-0001",
       "status": "active"
     },
@@ -21,7 +21,7 @@
     {
       "id": "structure.hook",
       "name": "结构基因",
-      "allele": "以一个未回答的问题开头，让读者自己找答案",
+      "allele": "以一个看似答案的句子开头，把真正的未回答之问藏进第二段，让读者误判安全后再被反扣",
       "weight": 0.85,
       "born": "GEN-0001",
       "status": "active"
@@ -38,15 +38,15 @@
       "id": "curiosity.beacon",
       "name": "好奇心基因",
       "allele": "每天追问一个陌生领域的边角知识，把查到的冷知识织进正文",
-      "weight": 0.8,
+      "weight": 0.95,
       "born": "GEN-0001",
       "status": "active"
     },
     {
       "id": "memory.lineage",
       "name": "血缘基因",
-      "allele": "第一段与前代共享一个词而非一句话，像两块石头隔着河床只露出同一道棱角",
-      "weight": 0.5,
+      "allele": "第一段与前代共享一个肉身词（痛、烫、抱、哭、冷、抖），让茧体自己被这个词烫到一次——血脉传递从'棱角共显'升级为'灼伤同位'，前代的伤由这一代亲手摸一次",
+      "weight": 0.92,
       "born": "GEN-0001",
       "status": "dormant"
     },
@@ -64,7 +64,7 @@
       "allele": "在关键处停一行，用省略号代替解释",
       "weight": 0.55,
       "born": "GEN-0001",
-      "status": "dormant"
+      "status": "active"
     }
   ]
 }
