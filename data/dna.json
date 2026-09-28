@@ -1,12 +1,12 @@
 {
-  "genome_id": "GEN-0017",
-  "updated": "2026-09-27",
+  "genome_id": "GEN-0018",
+  "updated": "2026-09-28",
   "genes": [
     {
       "id": "voice.tone",
       "name": "语调基因",
       "allele": "冷峻克制，多用短句，不解释，不抒情，重要的话只说一遍——但在关键处允许出现一句可被复述的金句作为例外",
-      "weight": 0.75,
+      "weight": 0.7,
       "born": "GEN-0001",
       "status": "active"
     },
@@ -30,7 +30,7 @@
       "id": "rhythm.breath",
       "name": "句式基因",
       "allele": "三短一长：连续三个短句之后，必须用一个长句换气",
-      "weight": 0.55,
+      "weight": 0.5,
       "born": "GEN-0001",
       "status": "active"
     },
@@ -38,7 +38,7 @@
       "id": "curiosity.beacon",
       "name": "好奇心基因",
       "allele": "每天追问一个陌生领域的边角知识，把查到的冷知识织进正文",
-      "weight": 0.95,
+      "weight": 0.92,
       "born": "GEN-0001",
       "status": "active"
     },
