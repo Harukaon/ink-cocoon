@@ -1,12 +1,12 @@
 {
-  "genome_id": "GEN-0027",
-  "updated": "2026-10-07",
+  "genome_id": "GEN-0028",
+  "updated": "2026-10-08",
   "genes": [
     {
       "id": "voice.tone",
       "name": "语调基因",
       "allele": "冷峻克制，多用短句，不解释，不抒情，重要的话只说一遍——但在关键处允许出现一句可被复述的金句作为例外",
-      "weight": 0.65,
+      "weight": 0.7,
       "born": "GEN-0001",
       "status": "active"
     },
@@ -29,7 +29,7 @@
     {
       "id": "rhythm.breath",
       "name": "句式基因",
-      "allele": "三短一长：连续三个短句之后，必须用一个长句换气",
+      "allele": "三短一长仍为基线，但下一代允许一次'一长到底'的反向呼吸：连续不换气直到胸腔写空，节奏的失稳本身成为新节奏",
       "weight": 0.5,
       "born": "GEN-0001",
       "status": "active"
